@@ -24,7 +24,10 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	compileOnly("org.projectlombok:lombok:1.18.24")
 	runtimeOnly("com.h2database:h2")
+
+	testImplementation("junit:junit:4.13.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
