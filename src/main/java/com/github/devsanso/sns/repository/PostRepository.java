@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @Repository
-public interface PostRepository extends JpaRepository<PostEntity,String> {
+public interface PostRepository extends JpaRepository<PostEntity,UUID> {
     @Query(value = "SELECT * FROM posts WHERE user_uuid=:user_uuid",nativeQuery = true)
-    public abstract ArrayList<PostEntity> findByUser(@Param("user_uuid") UUID userUUID);
+    abstract ArrayList<PostEntity> findByUser(@Param("user_uuid") UUID userUUID);
+    @Query(value = "DELETE FROM posts WHERE user_uuid=:user_uuid",nativeQuery = true)
+    abstract void deleteByUserUUID(@Param("user_uuid")UUID userUUID);
 }
