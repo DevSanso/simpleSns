@@ -21,7 +21,7 @@ public class UserProfileEntity {
 
     @Column(nullable = false)
     public String name;
-    @Column(name="image_data_url",nullable = true)
+    @Column(name="image_data_url",nullable = true,columnDefinition = "LONGTEXT")
     public String imageDataUrl;
 
 

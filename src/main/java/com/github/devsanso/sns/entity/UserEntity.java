@@ -1,10 +1,7 @@
 package com.github.devsanso.sns.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -12,6 +9,7 @@ import java.util.UUID;
 @Entity
 @Table(name ="users",indexes = @Index(name="user_id_index",columnList = "id"))
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

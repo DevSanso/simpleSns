@@ -59,7 +59,7 @@ public class PostRepositoryTests {
         var user = makeUser();
         var post = PostEntity.builder()
                 .content("hello world")
-                .ImageDataUrl("")
+                .imageDataUrl("")
                 .title("hello world")
                 .user(user)
                 .build();
@@ -75,19 +75,19 @@ public class PostRepositoryTests {
         var user = makeUser();
         var post = PostEntity.builder()
                 .content("hello world")
-                .ImageDataUrl("")
+                .imageDataUrl("")
                 .title("hello world")
                 .user(user)
                 .build();
         var post1 = PostEntity.builder()
                 .content("hello world")
-                .ImageDataUrl("")
+                .imageDataUrl("")
                 .title("hello world")
                 .user(user)
                 .build();
         var post2 = PostEntity.builder()
                 .content("hello world2")
-                .ImageDataUrl("")
+                .imageDataUrl("")
                 .title("hello world2")
                 .user(user)
                 .build();
