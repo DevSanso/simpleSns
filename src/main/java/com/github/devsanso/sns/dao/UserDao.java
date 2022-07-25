@@ -10,22 +10,23 @@ import com.github.devsanso.sns.repository.UserRepository;
 import com.github.devsanso.sns.vo.UserAmendmentVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
+@Repository
 @RequiredArgsConstructor
 public class UserDao {
     final private UserRepository userRepository;
     final private UserProfileRepository userProfileRepository;
 
-    public void insert(UserSubscriptionVODto dto) {
-        var profile = userProfileRepository.save(dto.toEntity().getUserProfile());
-        var user = dto.toEntity();
-        user.getUserProfile().profileUUID = profile.profileUUID;
-        userRepository.saveAndFlush(user);
+    public UUID insert(UserSubscriptionVODto dto) {
+        var user = dto.toEntityAndHashingPassword();
+        var profile = userProfileRepository.saveAndFlush(dto.toOnlyProfileEntity());
+        user.setUserProfile(profile);
+        var entity = userRepository.save(user);
+        return entity.userUUID;
     }
 
     public void update(UserAmendmentVO amendment) {
@@ -34,6 +35,7 @@ public class UserDao {
 
         if(amendment.name.isPresent())profile.name = amendment.name.get();
         if(amendment.imageDataUrl.isPresent())profile.imageDataUrl = amendment.imageDataUrl.get();
+        if(amendment.imageDataUrl.isEmpty())profile.imageDataUrl = null;
         if(amendment.password.isPresent())user.password = new StringDto(amendment.password.get()).toSha256HexString();
     }
 

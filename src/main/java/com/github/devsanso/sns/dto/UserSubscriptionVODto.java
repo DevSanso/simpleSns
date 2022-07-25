@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserSubscriptionVODto {
     private UserSubscriptionVO vo;
-    private UserProfileEntity toProfileEntity() {
+    public UserProfileEntity toOnlyProfileEntity() {
         return UserProfileEntity.builder()
                 .name(vo.getName())
                 .imageDataUrl(vo.getImageUrl())
@@ -19,7 +19,15 @@ public class UserSubscriptionVODto {
         return UserEntity.builder()
                 .id(vo.getId())
                 .password(vo.getPassword())
-                .userProfile(toProfileEntity())
+                .userProfile(toOnlyProfileEntity())
+                .build();
+    }
+
+    public UserEntity toEntityAndHashingPassword() {
+        return UserEntity.builder()
+                .id(vo.getId())
+                .password(new StringDto(vo.getPassword()).toSha256HexString())
+                .userProfile(toOnlyProfileEntity())
                 .build();
     }
 }
