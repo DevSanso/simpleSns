@@ -20,13 +20,14 @@ public class PostDao {
     final private PostRepository postRepository;
     final private UserRepository userRepository;
 
-    public void add(UUID userUUID, PostVODto dto) {
+    public UUID add(UUID userUUID, PostVODto dto) {
         var user = userRepository.findById(userUUID);
         if(user.isEmpty())throw new IllegalArgumentException();
         var userEntity = user.get();
 
         var postEntity = dto.toEntity(userEntity);
-        postRepository.save(postEntity);
+        var entity = postRepository.save(postEntity);
+        return entity.postUUID;
     }
 
     public void delete(UUID postUUID) {
@@ -50,8 +51,8 @@ public class PostDao {
                 .map(this::convertPostDto)
                 .collect(ArrayList::new,ArrayList::add,ArrayList::addAll);
     }
-    public ArrayList<PostEntityDto> selectRange(int start,int end) {
-        return postRepository.findAll()
+    public ArrayList<PostEntityDto> selectRange(int start,int range) {
+        return postRepository.findRange(start,range)
                 .stream()
                 .map(this::convertPostDto)
                 .collect(ArrayList::new,ArrayList::add,ArrayList::addAll);
