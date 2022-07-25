@@ -69,4 +69,39 @@ public class PostRepositoryTests {
         var fined = postRepository.findByUser(user.getUserUUID());
         Assert.assertEquals(1,fined.size());
     }
+
+    @Test
+    public void selectRangeTest() {
+        var user = makeUser();
+        var post = PostEntity.builder()
+                .content("hello world")
+                .ImageDataUrl("")
+                .title("hello world")
+                .user(user)
+                .build();
+        var post1 = PostEntity.builder()
+                .content("hello world")
+                .ImageDataUrl("")
+                .title("hello world")
+                .user(user)
+                .build();
+        var post2 = PostEntity.builder()
+                .content("hello world2")
+                .ImageDataUrl("")
+                .title("hello world2")
+                .user(user)
+                .build();
+        postRepository.save(post);
+        postRepository.save(post1);
+        postRepository.save(post2);
+        var findPosts = postRepository.findAll();
+        Assert.assertEquals(3,findPosts.size());
+
+        findPosts = postRepository.findRange(0,3);
+        Assert.assertEquals(3,findPosts.size());
+        findPosts = postRepository.findRange(1,3);
+        Assert.assertEquals(2,findPosts.size());
+        findPosts = postRepository.findRange(4,2);
+        Assert.assertEquals(0,findPosts.size());
+    }
 }
