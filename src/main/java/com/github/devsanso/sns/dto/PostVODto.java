@@ -21,14 +21,14 @@ public class PostVODto {
                 .user(user)
                 .title(vo.title)
                 .content(vo.content)
-                .ImageDataUrl(DataUrl())
+                .imageDataUrl(DataUrl())
                 .build();
     }
     public PostEntity toNoUserEntity() {
         return PostEntity.builder()
                 .title(vo.title)
                 .content(vo.content)
-                .ImageDataUrl(DataUrl())
+                .imageDataUrl(DataUrl())
                 .build();
     }
 }

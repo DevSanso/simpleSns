@@ -20,8 +20,8 @@ public class PostEntity {
     @Column(name="post_uuid",columnDefinition = "BINARY(16)")
     @GeneratedValue(generator = "UUID")
     public UUID postUUID;
-    @Column(name="image_data_url")
-    public String ImageDataUrl;
+    @Column(name="image_data_url",columnDefinition = "LONGTEXT")
+    public String imageDataUrl;
     @Column(name="title")
     public String title;
     @Column(name="content")
