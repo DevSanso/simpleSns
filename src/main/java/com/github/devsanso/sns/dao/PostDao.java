@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -56,5 +57,12 @@ public class PostDao {
                 .stream()
                 .map(this::convertPostDto)
                 .collect(ArrayList::new,ArrayList::add,ArrayList::addAll);
+    }
+
+    public Optional<PostEntityDto> selectByUUID(UUID postUUID) {
+        var find = postRepository.findById(postUUID);
+        if(find.isEmpty())return Optional.empty();
+
+        return Optional.of(new PostEntityDto(find.get()));
     }
 }
