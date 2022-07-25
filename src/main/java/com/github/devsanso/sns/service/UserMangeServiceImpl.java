@@ -8,7 +8,7 @@ import com.github.devsanso.sns.vo.UserSubscriptionVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
