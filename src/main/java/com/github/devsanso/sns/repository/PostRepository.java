@@ -16,4 +16,7 @@ public interface PostRepository extends JpaRepository<PostEntity,UUID> {
     abstract ArrayList<PostEntity> findByUser(@Param("user_uuid") UUID userUUID);
     @Query(value = "DELETE FROM posts WHERE user_uuid=:user_uuid",nativeQuery = true)
     abstract void deleteByUserUUID(@Param("user_uuid")UUID userUUID);
+
+    @Query(value = "SELECT * FROM posts LIMIT :limit OFFSET :offset",nativeQuery = true)
+    abstract ArrayList<PostEntity> findRange(@Param("offset") int start,@Param("limit") int end);
 }
