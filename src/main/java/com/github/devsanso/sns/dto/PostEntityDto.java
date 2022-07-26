@@ -11,7 +11,7 @@ import java.util.Optional;
 public class PostEntityDto {
     private PostEntity entity;
 
-    private PostVO toPostVO() {
+    public PostVO toPostVO() {
         return PostVO.builder()
                 .title(entity.getTitle())
                 .content(entity.getContent())
