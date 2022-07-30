@@ -21,11 +21,12 @@ public class PostEntityDto {
     }
 
     public PostVO toPostVO() {
+        var image = entity.getImageDataUrl();
         return PostVO.builder()
                 .author(entity.getUser().getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .headerImageDataUrl(Optional.of(entity.getImageDataUrl()))
+                .headerImageDataUrl(entity.getImageDataUrl() != null? Optional.of(image) : Optional.empty())
                 .build();
     }
 }
