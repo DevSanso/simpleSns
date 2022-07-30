@@ -2,12 +2,11 @@ package com.github.devsanso.sns.service;
 
 
 import com.github.devsanso.sns.dao.PostDao;
-import com.github.devsanso.sns.dto.PostVODto;
+import com.github.devsanso.sns.dto.PostRegisterVODto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Service
@@ -17,7 +16,7 @@ public class PostManageServiceImpl implements PostManageService {
 
     @Override
     @Transactional
-    public UUID addPost(UUID userUUID,PostVODto vo) {
+    public UUID addPost(UUID userUUID, PostRegisterVODto vo) {
         return postDao.add(userUUID,vo);
     }
 

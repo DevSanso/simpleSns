@@ -1,5 +1,6 @@
 package com.github.devsanso.sns.service;
 
+import com.github.devsanso.sns.vo.PostRegisterVO;
 import com.github.devsanso.sns.vo.PostVO;
 import com.github.devsanso.sns.vo.UserInfoVO;
 

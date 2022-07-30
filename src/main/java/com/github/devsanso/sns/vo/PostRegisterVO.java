@@ -10,9 +10,8 @@ import java.util.Optional;
 @Builder
 @Getter
 @AllArgsConstructor
-public class PostVO {
+public class PostRegisterVO {
     public Optional<String> headerImageDataUrl;
     public String title;
     public String content;
-    public String author;
 }

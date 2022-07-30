@@ -2,7 +2,7 @@ package com.github.devsanso.sns.dao;
 
 
 import com.github.devsanso.sns.dto.PostEntityDto;
-import com.github.devsanso.sns.dto.PostVODto;
+import com.github.devsanso.sns.dto.PostRegisterVODto;
 import com.github.devsanso.sns.entity.PostEntity;
 import com.github.devsanso.sns.entity.UserEntity;
 import com.github.devsanso.sns.repository.PostRepository;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Function;
 
 @Component
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class PostDao {
     final private PostRepository postRepository;
     final private UserRepository userRepository;
 
-    public UUID add(UUID userUUID, PostVODto dto) {
+    public UUID add(UUID userUUID, PostRegisterVODto dto) {
         var user = userRepository.findById(userUUID);
         if(user.isEmpty())throw new IllegalArgumentException();
         var userEntity = user.get();

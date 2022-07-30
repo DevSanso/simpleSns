@@ -3,12 +3,12 @@ package com.github.devsanso.sns.dto;
 
 import com.github.devsanso.sns.entity.PostEntity;
 import com.github.devsanso.sns.entity.UserEntity;
-import com.github.devsanso.sns.vo.PostVO;
+import com.github.devsanso.sns.vo.PostRegisterVO;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class PostVODto {
-    private PostVO vo;
+public class PostRegisterVODto {
+    private PostRegisterVO vo;
 
     private String DataUrl() {
         if(vo.headerImageDataUrl.isEmpty())return null;
