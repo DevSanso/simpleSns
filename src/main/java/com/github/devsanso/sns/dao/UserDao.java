@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,7 +31,11 @@ public class UserDao {
     }
 
     public void update(UserAmendmentVO amendment) {
-        var user = userRepository.findById(amendment.userUUID).get();
+        var u = userRepository.findById(amendment.userUUID);
+        if (u.isEmpty())
+            throw new NoSuchElementException();
+
+        var user = u.get();
         var profile = user.getUserProfile();
 
         if(amendment.name.isPresent())profile.name = amendment.name.get();
