@@ -21,11 +21,17 @@ public class PostManageServiceImpl implements PostManageService {
     }
 
     @Override
+    @Transactional
     public void deletePost(UUID postUUID) {
         postDao.delete(postUUID);
     }
 
     @Override
+    @Transactional
+    public void deletePost(UUID userUUID, UUID postUUID) {postDao.delete(userUUID,postUUID);}
+
+    @Override
+    @Transactional
     public void deleteByUserSelf(UUID userUUID) {
         postDao.deleteByUser(userUUID);
     }

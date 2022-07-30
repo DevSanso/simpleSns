@@ -68,6 +68,17 @@ public class PostMangeServiceTests {
         Assert.assertEquals(0,post.size());
     }
     @Test
+    public void deletePostUseUserUUIDAndPostUUID() {
+        var vo = RandomUserSubscriptionVO.random();
+        var dto = new UserSubscriptionVODto(vo);
+        var uuid = userDao.insert(dto);
+
+        var postUUID =service.addPost(uuid, new PostRegisterVODto(RandomPostRegisterVO.random()));
+        service.deletePost(uuid,postUUID);
+        var post = postDao.selectRange(0,1);
+        Assert.assertEquals(0,post.size());
+    }
+    @Test
     public void deletePostByUser() {
         var vo = RandomUserSubscriptionVO.random();
         var dto = new UserSubscriptionVODto(vo);

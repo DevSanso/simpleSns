@@ -8,6 +8,7 @@ import com.github.devsanso.sns.entity.UserEntity;
 import com.github.devsanso.sns.repository.PostRepository;
 import com.github.devsanso.sns.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class PostDao {
     public void delete(UUID postUUID) {
         postRepository.deleteById(postUUID);
     }
+    public void delete(UUID userUUID,UUID postUUID) {postRepository.deleteBy(userUUID,postUUID);}
 
     public void deleteByUser(UserEntity user) {
         postRepository.deleteByUserUUID(user.getUserUUID());
