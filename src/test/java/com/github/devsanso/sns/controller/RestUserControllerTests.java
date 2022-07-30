@@ -38,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ComponentScan("com.github.devsanso.sns")
+@ComponentScan("com.github.devsanso.sns.configure")
 @TestPropertySource("classpath:application.properties")
 public class RestUserControllerTests {
     public MockHttpSession session;

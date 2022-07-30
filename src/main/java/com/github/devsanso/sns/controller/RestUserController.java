@@ -52,15 +52,9 @@ public class RestUserController {
             var sessionDto = new HttpSessionDto(session);
             var sessionInfo = sessionDto.toInfo();
 
-            if(!request.getRemoteAddr().equals(sessionInfo.getIp()))
-                throw new SecurityException();
 
             var dto = new RestUserPatchRequestDto(body);
             userManageService.amend(dto.toUserAmendmentVO(UUID.fromString(sessionInfo.getUserUUID())));
-        }
-        catch(SecurityException e) {
-            response.setStatus(403);
-            return;
         }
         catch(NoSuchElementException e) {
             response.setStatus(404);
@@ -80,22 +74,15 @@ public class RestUserController {
             HttpServletRequest request,
             HttpServletResponse response) {
         var session = request.getSession(false);
-        if(session == null) {
-            response.setStatus(403);
-            return;
-        }
 
 
         try {
             var sessionDto = new HttpSessionDto(session);
             var sessionInfo = sessionDto.toInfo();
 
-            if(!request.getRemoteAddr().equals(sessionInfo.getIp()))
-                throw new SecurityException();
-
             userManageService.deleteUser(UUID.fromString(sessionInfo.getUserUUID()));
         }
-        catch(SecurityException | NoSuchElementException e) {
+        catch(NoSuchElementException e) {
             response.setStatus(403);
             return;
         } catch(Exception e) {
