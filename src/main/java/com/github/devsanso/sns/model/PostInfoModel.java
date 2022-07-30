@@ -1,17 +1,15 @@
-package com.github.devsanso.sns.vo;
+package com.github.devsanso.sns.model;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.Optional;
-
 @Builder
-@Getter
 @AllArgsConstructor
-public class PostVO {
-    public Optional<String> headerImageDataUrl;
+@Getter
+public class PostInfoModel {
+    public String headerImageDataUrl;
     public String title;
     public String content;
     public String author;

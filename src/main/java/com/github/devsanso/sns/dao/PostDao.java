@@ -2,18 +2,18 @@ package com.github.devsanso.sns.dao;
 
 
 import com.github.devsanso.sns.dto.PostEntityDto;
-import com.github.devsanso.sns.dto.PostVODto;
+import com.github.devsanso.sns.dto.PostRegisterVODto;
 import com.github.devsanso.sns.entity.PostEntity;
 import com.github.devsanso.sns.entity.UserEntity;
 import com.github.devsanso.sns.repository.PostRepository;
 import com.github.devsanso.sns.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Function;
 
 @Component
 @RequiredArgsConstructor
@@ -21,7 +21,7 @@ public class PostDao {
     final private PostRepository postRepository;
     final private UserRepository userRepository;
 
-    public UUID add(UUID userUUID, PostVODto dto) {
+    public UUID add(UUID userUUID, PostRegisterVODto dto) {
         var user = userRepository.findById(userUUID);
         if(user.isEmpty())throw new IllegalArgumentException();
         var userEntity = user.get();
@@ -34,6 +34,7 @@ public class PostDao {
     public void delete(UUID postUUID) {
         postRepository.deleteById(postUUID);
     }
+    public void delete(UUID userUUID,UUID postUUID) {postRepository.deleteBy(userUUID,postUUID);}
 
     public void deleteByUser(UserEntity user) {
         postRepository.deleteByUserUUID(user.getUserUUID());

@@ -1,6 +1,11 @@
 # /post/delete
 
 
+
+**Method** : `DELETE`
+**necessary session**  
+**역할** : `포스트 삭제.`
+
 **Url Parameter**
 ``` typescript
 {
@@ -11,9 +16,6 @@
 ```
 /post/delete/:postUUID
 ```
----
-**Method** : `DELETE`
-**역할** : `포스트 삭제.`
 
 ## Success Response
 **상태 코드** : `200 OK`

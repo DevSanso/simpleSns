@@ -3,12 +3,12 @@ package com.github.devsanso.sns.service;
 
 import com.github.devsanso.sns.dao.PostDao;
 import com.github.devsanso.sns.dao.UserDao;
-import com.github.devsanso.sns.dto.PostVODto;
+import com.github.devsanso.sns.dto.PostRegisterVODto;
 import com.github.devsanso.sns.dto.UserSubscriptionVODto;
 import com.github.devsanso.sns.repository.PostRepository;
 import com.github.devsanso.sns.repository.UserProfileRepository;
 import com.github.devsanso.sns.repository.UserRepository;
-import com.github.devsanso.sns.utils.RandomPostVO;
+import com.github.devsanso.sns.utils.RandomPostRegisterVO;
 import com.github.devsanso.sns.utils.RandomUserSubscriptionVO;
 import org.junit.After;
 import org.junit.Assert;
@@ -51,7 +51,7 @@ public class PostMangeServiceTests {
         var dto = new UserSubscriptionVODto(vo);
         var uuid = userDao.insert(dto);
 
-        var postUUID =service.addPost(uuid, new PostVODto(RandomPostVO.random()));
+        var postUUID =service.addPost(uuid, new PostRegisterVODto(RandomPostRegisterVO.random()));
 
         var post = postDao.selectByUUID(postUUID);
         Assert.assertTrue(post.isPresent());
@@ -62,8 +62,19 @@ public class PostMangeServiceTests {
         var dto = new UserSubscriptionVODto(vo);
         var uuid = userDao.insert(dto);
 
-        var postUUID =service.addPost(uuid, new PostVODto(RandomPostVO.random()));
+        var postUUID =service.addPost(uuid, new PostRegisterVODto(RandomPostRegisterVO.random()));
         service.deletePost(postUUID);
+        var post = postDao.selectRange(0,1);
+        Assert.assertEquals(0,post.size());
+    }
+    @Test
+    public void deletePostUseUserUUIDAndPostUUID() {
+        var vo = RandomUserSubscriptionVO.random();
+        var dto = new UserSubscriptionVODto(vo);
+        var uuid = userDao.insert(dto);
+
+        var postUUID =service.addPost(uuid, new PostRegisterVODto(RandomPostRegisterVO.random()));
+        service.deletePost(uuid,postUUID);
         var post = postDao.selectRange(0,1);
         Assert.assertEquals(0,post.size());
     }
@@ -73,7 +84,7 @@ public class PostMangeServiceTests {
         var dto = new UserSubscriptionVODto(vo);
         var uuid = userDao.insert(dto);
 
-        service.addPost(uuid, new PostVODto(RandomPostVO.random()));
+        service.addPost(uuid, new PostRegisterVODto(RandomPostRegisterVO.random()));
         service.deleteByUserSelf(uuid);
         var post = postDao.selectRange(0,1);
         Assert.assertEquals(0,post.size());

@@ -29,12 +29,11 @@
 ---
 
 **Method** : `PATCH`
-**necessary session**
+**necessary session**  
 **역할** : `유저의 비밀번호, 이름등 여러 정보를 수정 한다`
 **Request Body**
 ``` typescript
 {
-    "userUUID" : String
     "name" : String | undefined
     "imageData" : String | undefined
     "password" : String | undefined
@@ -61,20 +60,9 @@
 ---
 
 **Method** : `DELETE`
-**necessary session**
+**necessary session**  
 **역할** : `유저의 회원탈퇴 기능을 수행한다.`
 
-**Url Parameter**
-``` typescript
-{
-    "userUUID" : String
-}
-```
-
-## Example
-```
-/user/:userUUID
-```
 
 ## Success Response
 **상태 코드** : `204 No Content`

@@ -1,13 +1,12 @@
 package com.github.devsanso.sns.dao;
 
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.github.devsanso.sns.dto.PostVODto;
+import com.github.devsanso.sns.dto.PostRegisterVODto;
 import com.github.devsanso.sns.dto.UserSubscriptionVODto;
 import com.github.devsanso.sns.repository.PostRepository;
 import com.github.devsanso.sns.repository.UserProfileRepository;
 import com.github.devsanso.sns.repository.UserRepository;
-import com.github.devsanso.sns.utils.RandomPostVO;
+import com.github.devsanso.sns.utils.RandomPostRegisterVO;
 import com.github.devsanso.sns.utils.RandomUserSubscriptionVO;
 import org.junit.After;
 import org.junit.Assert;
@@ -53,7 +52,7 @@ public class PostDaoTests {
         var uuid = dao.insert(dto);
 
 
-        var postUUID = postDao.add(uuid,new PostVODto(RandomPostVO.random()));
+        var postUUID = postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
         var find = postRepository.findById(postUUID);
         Assert.assertEquals(true,find.isPresent());
     }
@@ -63,7 +62,7 @@ public class PostDaoTests {
         var vo = RandomUserSubscriptionVO.random();
         var dto = new UserSubscriptionVODto(vo);
         var uuid = dao.insert(dto);
-        var postUUID = postDao.add(uuid,new PostVODto(RandomPostVO.random()));
+        var postUUID = postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
         var find = postRepository.findAll();
         Assert.assertEquals(1,find.size());
         postDao.delete(postUUID);
@@ -75,7 +74,7 @@ public class PostDaoTests {
         var vo = RandomUserSubscriptionVO.random();
         var dto = new UserSubscriptionVODto(vo);
         var uuid = dao.insert(dto);
-        var postUUID = postDao.add(uuid,new PostVODto(RandomPostVO.random()));
+        var postUUID = postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
         var find = postRepository.findAll();
 
         Assert.assertEquals(1,find.size());
@@ -94,14 +93,14 @@ public class PostDaoTests {
         var dto = new UserSubscriptionVODto(vo);
         var uuid = dao.insert(dto);
 
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
 
         Exception e = null;
         try {
-            postDao.add(UUID.randomUUID(),new PostVODto(RandomPostVO.random()));
+            postDao.add(UUID.randomUUID(),new PostRegisterVODto(RandomPostRegisterVO.random()));
         }catch(Exception ee) {
             e = ee;
         }
@@ -119,10 +118,10 @@ public class PostDaoTests {
         var find = postDao.selectRange(1,3);
         Assert.assertEquals(0,find.size());
 
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
-        postDao.add(uuid,new PostVODto(RandomPostVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
+        postDao.add(uuid,new PostRegisterVODto(RandomPostRegisterVO.random()));
 
         find = postDao.selectRange(3,4);
         Assert.assertEquals(1,find.size());

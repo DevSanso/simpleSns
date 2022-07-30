@@ -20,6 +20,10 @@ public interface PostRepository extends JpaRepository<PostEntity,UUID> {
     @Modifying
     abstract void deleteByUserUUID(@Param("user_uuid")UUID userUUID);
 
+    @Query(value = "DELETE FROM posts WHERE user_uuid = :user_uuid AND post_uuid = :post_uuid",nativeQuery = true)
+    @Modifying
+    abstract void deleteBy(@Param("user_uuid")UUID userUUID,@Param("post_uuid")UUID postUUID);
+
     @Query(value = "SELECT * FROM posts LIMIT :limit OFFSET :offset",nativeQuery = true)
     abstract ArrayList<PostEntity> findRange(@Param("offset") int start,@Param("limit") int range);
 }

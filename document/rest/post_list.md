@@ -7,16 +7,14 @@
 **Query String**
 ``` typescript
 {
-    offset : {
-        "start" : number
-        "end : number
-    }
+    "start" : number
+    "end" : number
 }
 ```
 
 ## Example
 ```
-/post_list?offset="{start:0,end:12}"
+/post/list?start=0&end=10
 ```
 
 ## Success Response

@@ -69,6 +69,20 @@ public class PostRepositoryTests {
         var fined = postRepository.findByUser(user.getUserUUID());
         Assert.assertEquals(1,fined.size());
     }
+    @Test
+    public void deleteByPostTest() {
+        var user = makeUser();
+        var post = PostEntity.builder()
+                .content("hello world")
+                .imageDataUrl("")
+                .title("hello world")
+                .user(user)
+                .build();
+        var savedPost = postRepository.save(post);
+        postRepository.deleteBy(user.getUserUUID(),post.getPostUUID());
+        var finds = postRepository.findAll();
+        Assert.assertEquals(0,finds.size());
+    }
 
     @Test
     public void selectRangeTest() {
