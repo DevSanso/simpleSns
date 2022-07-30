@@ -29,11 +29,12 @@ public class SessionInterceptor implements HandlerInterceptor {
         var url = "/"+request.getRequestURI().split("/")[1];
         var excludes = excludeHttpMethod.get(url);
 
-        var existMethod = Arrays.stream(excludes).anyMatch(s-> s.equals(request.getMethod()));
 
-        if(existMethod) {
-            return true;
+        if(excludes != null) {
+            var existMethod = Arrays.stream(excludes).anyMatch(s-> s.equals(request.getMethod()));
+            if(existMethod) return true;
         }
+
 
         if(session == null) {
             response.setStatus(403);
