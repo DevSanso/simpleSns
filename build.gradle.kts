@@ -1,10 +1,15 @@
 
 
+
 plugins {
 	id("java")
+	kotlin("jvm") version "1.6.21"
 	id("org.springframework.boot") version "2.7.3-SNAPSHOT"
 	id("io.spring.dependency-management") version "1.0.12.RELEASE"
+	id("com.github.devsanso.sns.plugin") version "1.0.0" apply true
 }
+
+
 
 group = "com.github.devsanso"
 version = "0.0.1-SNAPSHOT"
@@ -37,3 +42,10 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+frontExtension {
+	outDir.set((rootProject.projectDir.absolutePath
+			+ "/src/main/resources/static/js").toString())
+}
+
+tasks.getByName("build").dependsOn("BuildWeb")
+
